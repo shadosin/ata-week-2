@@ -1,0 +1,57 @@
+@startuml
+title [[https://tiny.amazon.com/znd46g3n/DebuggingSNS Subscribe & Save Debugging Classroom Activity]]
+class App #lightgrey {
+    + {static} getAmazonProductService() : AmazonProductService
+    + {static} getAmazonIdentityService() : AmazonIdentityService
+    + {static} getSubscriptionDAO() : SubscriptionDAO
+    + {static} getSubscriptionFileStorage() : SubscriptionFileStorage
+    + {static} getSubscriptionService() : SubscriptionService
+}
+
+class Subscription {
+    -String id
+    -String customerId
+    -String asin
+    -int frequency
+    +getId() : String
+    +setId(id : String) : void
+    +getCustomerId() : String
+    +getAsin() : String
+    +getFrequency() : int
+    +toString() : String
+}
+
+class SubscriptionDebugUtil #lightgrey {
+    +{static}main(String[] args) : void
+}
+
+class SubscriptionService {
+    +subscribe(customerId : String, asin : String, frequency : int) : Subscription
+    +getSubscription(subscriptionId : String) : Subscription
+}
+
+class SubscriptionDAO {
+    +createSubscription(customerId : String, asin : String, frequency : int) : Subscription
+    +getSubscription(subscriptionId : String) : Subscription
+}
+
+class SubscriptionFileStorage {
+    +getSubscriptionById(subscriptionId : String) : Subscription
+    +writeSubscription(subscription : Subscription) : Subscription
+}
+
+class AmazonProductService #lightgrey{
+    +getProductByAsin(asin : String) : Product
+}
+
+class AmazonIdentityService #lightgrey{
+    +validateCustomer(customerId : String) : boolean
+}
+
+'Relationships
+SubscriptionDebugUtil -- SubscriptionService
+SubscriptionService *-- SubscriptionDAO
+SubscriptionDAO *-- SubscriptionFileStorage
+SubscriptionService -- AmazonProductService
+SubscriptionService -- AmazonIdentityService
+@enduml
