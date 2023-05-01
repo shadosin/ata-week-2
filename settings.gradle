@@ -1,0 +1,9 @@
+rootProject.name = 'ata-week-2'
+include ':Utilities'
+include ':UnitTesting:KenzieMath'
+include ':GroupWork:SubscribeAndSave'
+include ':Debugging:WordAnalyzer'
+include 'SupportingMaterials'
+include 'SupportingMaterials:DebugDemo'
+findProject(':SupportingMaterials:DebugDemo')?.name = 'DebugDemo'
+

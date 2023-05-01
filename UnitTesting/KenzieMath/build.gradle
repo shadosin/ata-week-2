@@ -1,0 +1,26 @@
+plugins {
+    id 'ata-curriculum.snippets-conventions'
+    id 'ata-curriculum.integration-test-conventions'
+}
+
+checkstyle {
+    def suppressionFile = rootProject.file('Utilities/ATACheckstyle/configuration/checkstyle/unit1/suppressions.xml')
+    configProperties.put('checkstyle.suppression.filter', suppressionFile)
+}
+
+def wflowToTestsMap = [
+        'unittesting-kenziemath-addition-test': ['com.kenzie.unittesting.kenziemath.addition.KenzieAdditionTest'],
+        'unittesting-kenziemath-texttruncator-test': ['com.kenzie.unittesting.kenziemath.texttruncator.TextTruncatorTest'],
+        'unittesting-kenziemath-math-test': ['com.kenzie.unittesting.kenziemath.math.KenzieMathTest'],
+]
+
+wflowToTestsMap.forEach { wflowName, testList ->
+    tasks.register(wflowName) {
+        dependsOn wflowtest
+        test.doFirst {
+            filter {
+                testList.each { includeTestsMatching it }
+            }
+        }
+    }
+}
