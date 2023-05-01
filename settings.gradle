@@ -1,0 +1,5 @@
+rootProject.name = 'ata-week-2'
+include ':Utilities'
+include ':UnitTesting:KenzieMath'
+include ':GroupWork:SubscribeAndSave'
+include ':Debugging:WordAnalyzer'
