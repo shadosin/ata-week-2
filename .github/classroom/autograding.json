@@ -1,0 +1,54 @@
+{
+  "tests": [
+    {
+      "name": "Debugging - WordAnalyzer Unit Tests",
+      "setup": "",
+      "run": "./gradlew debugging-wordanalyzer-test --rerun-tasks",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": null
+    },
+    {
+      "name": "Unit Testing - Kenzie Math - Addition Unit Tests",
+      "setup": "",
+      "run": "./gradlew unittesting-kenziemath-addition-test --rerun-tasks",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": null
+    },
+    {
+      "name": "Unit Testing - Kenzie Math - Text Truncator Unit Tests",
+      "setup": "",
+      "run": "./gradlew unittesting-kenziemath-texttruncator-test --rerun-tasks",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": null
+    },
+    {
+      "name": "Unit Testing - Kenzie Math - Math Test",
+      "setup": "",
+      "run": "./gradlew unittesting-kenziemath-math-test --rerun-tasks",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": null
+    },
+    {
+      "name": "Group Work - SubscribeAndSave - Unit Tests",
+      "setup": "",
+      "run": "./gradlew groupwork-subscribeandsave-test --rerun-tasks",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": null
+    }
+  ]
+}
