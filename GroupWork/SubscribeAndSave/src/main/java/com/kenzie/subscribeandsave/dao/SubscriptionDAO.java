@@ -36,7 +36,8 @@ public class SubscriptionDAO {
      * @return The newly created {@code Subscription} if successful, {@code null} otherwise
      */
     public Subscription createSubscription(String customerId, String asin, int frequency) {
-        Subscription subscription = Subscription.builder()
+        Subscription subscription =
+                    Subscription.builder()
                     .withAsin(asin)
                     .withCustomerId(customerId)
                     .withFrequency(frequency)

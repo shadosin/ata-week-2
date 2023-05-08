@@ -27,9 +27,10 @@ public class WordAnalyzer {
      * @return the first repeated character, or 0 if none found.
      */
     public char firstRepeatedCharacter() {
-        for (int i = 1; i < word.length() - 1; i++) {
+        for (int i = 0; i < word.length() - 1; i++) {
             char current = word.charAt(i);
             char adjacent = word.charAt(i + 1);
+            //System.out.println("Comparing " + current + " and " + adjacent);
             if (current == adjacent) {
                 return current;
             }
@@ -47,7 +48,7 @@ public class WordAnalyzer {
      * @return the first multiply occurring character, or 0 if none found
      */
     public char firstMultipleCharacter() {
-        for (int i = 0; i < word.length(); i++) {
+        for (int i = 0; i < word.length()-1; i++) {
             char ch = word.charAt(i);
             if (find(ch, i) >= 0) {
                 return ch;
@@ -64,7 +65,7 @@ public class WordAnalyzer {
      * @return -1 if c is not found, or the index >= start where it occurs.
      */
     private int find(char c, int start) {
-        for (int i = start; i < word.length(); i++) {
+        for (int i = start +1; i < word.length(); i++) {
             if (word.charAt(i) == c) {
                 return i;
             }
@@ -81,7 +82,7 @@ public class WordAnalyzer {
      */
     public int countRepeatedCharacters() {
         int numGroups = 0;
-        for (int i = 1; i < word.length() - 1; i++) {
+        for (int i = 0; i < word.length()-1; i++) {
             // Is the next character part of the repeat?
             if (word.charAt(i) == word.charAt(i + 1)) {
                 // Is this the start of the repeat?

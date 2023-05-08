@@ -48,34 +48,37 @@ public class SubscriptionService {
     public Subscription subscribe(String customerId, String asin, int frequency) {
         if (StringUtils.isBlank(customerId) || StringUtils.isBlank(asin)) {
             throw new IllegalArgumentException(
-                String.format(
-                    "Invalid inputs. A Customer ID and ASIN must be provided. Provided: {Customer ID: %s, ASIN: %s}",
-                    customerId,
-                    asin)
+                    String.format(
+                            "Invalid inputs. A Customer ID and ASIN must be provided. Provided: {Customer ID: %s, ASIN: %s}",
+                            customerId,
+                            asin)
             );
         }
 
         if (frequency < 1 || frequency > 6) {
             throw new IllegalArgumentException(
-                String.format(
-                    "Invalid frequency value. Please provide how often (in months) the " +
-                        "subscription should occur - between 1 and 6. Provided: {Frequency: %d}",
-                    frequency));
+                    String.format(
+                            "Invalid frequency value. Please provide how often (in months) the " +
+                                    "subscription should occur - between 1 and 6. Provided: {Frequency: %d}",
+                            frequency));
         }
 
         if (!identityService.validateCustomer(customerId)) {
             throw new IllegalArgumentException(
-                String.format("Unable to create subscription for customerId: %s. Unknown customer.", customerId)
+                    String.format("Unable to create subscription for customerId: %s. Unknown customer.", customerId)
             );
         }
 
         Product product = productService.getProductByAsin(asin);
         if (product == null) {
             throw new IllegalArgumentException(
-                String.format("Unable to create subscription for ASIN: % s. Unrecognized ASIN.", asin)
+                    String.format("Unable to create subscription for ASIN: % s. Unrecognized ASIN.", asin)
             );
         }
+        if (product.isSNS() == false) {
 
+            throw new IllegalArgumentException("Item is not available for subscription");
+        }
         return subscriptionDAO.createSubscription(customerId, asin, frequency);
     }
 

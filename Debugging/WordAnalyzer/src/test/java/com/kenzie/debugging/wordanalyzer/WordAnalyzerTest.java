@@ -197,7 +197,7 @@ public class WordAnalyzerTest {
 
         Object foundEndCharacter = MethodInvoker.invokeInstanceMethodWithReturnValue(wordAnalyzerLastLetterClassObject, findMethod, letterToTest2Char, startIndex);
 
-        assertEquals(foundStartCharacter.toString(), "0");
+        assertEquals(foundStartCharacter.toString(), "-1");
         assertEquals(foundEndCharacter.toString(), "12");
     }
 

@@ -47,7 +47,7 @@ public class KenzieMath {
      * @param integers The non-null/non-empty integers to compute the average of
      * @return the resulting average (as a double)
      */
-    public double average(final int[] integers) {
+    public double average(final int[] integers){
         if (null == integers || integers.length == 0) {
             throw new IllegalArgumentException("Cannot compute the average of an empty/null array of integers");
         }

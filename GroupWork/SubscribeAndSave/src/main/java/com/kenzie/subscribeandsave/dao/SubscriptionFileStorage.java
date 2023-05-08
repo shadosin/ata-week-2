@@ -82,8 +82,8 @@ public class SubscriptionFileStorage {
             if (subscriptionId.equals(id)) {
                 Subscription subscription = Subscription.builder()
                         .withSubscriptionId(id)
-                        .withAsin(subscriptionData[1])
-                        .withCustomerId(subscriptionData[2])
+                        .withAsin(subscriptionData[2])
+                        .withCustomerId(subscriptionData[1])
                         .withFrequency(Integer.parseInt(subscriptionData[3]))
                         .build();
                 return subscription;

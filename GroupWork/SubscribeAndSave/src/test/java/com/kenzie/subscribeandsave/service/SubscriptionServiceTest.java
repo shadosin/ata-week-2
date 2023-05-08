@@ -41,9 +41,9 @@ public class SubscriptionServiceTest {
         pass = subscribe_newSubscription_subscriptionReturned();
         pass = getSubscription_existingSubscription_subscriptionReturned() && pass;
         pass = subscribe_unknownCustomer_exceptionOccurs() && pass;
-        pass = test_bug1() && pass;
-        pass = test_bug2() && pass;
-        pass = test_bug3() && pass;
+        pass = subscribe_invalidSIN_throwsIllegalException() && pass;
+        pass = subscribe_snsFalse_throwsIllegalException() && pass;
+        pass = getSubscription_validCustomerId_returnsCorrectFormat() && pass;
 
         if (!pass) {
             String errorMessage = "\n/!\\ /!\\ /!\\ The SubscriptionService tests failed. Test aborted. /!\\ /!\\ /!\\";
@@ -120,39 +120,60 @@ public class SubscriptionServiceTest {
     }
 
     // PARTICIPANTS: Fill in the example test below after fixing Bug 1 - refactor as needed
-    public boolean test_bug1() {
+    public boolean subscribe_invalidSIN_throwsIllegalException() {
         // GIVEN
-
+        String customerId = "amzn1.account.AEZI3A06339413S37ZHKJQUEGLC4";
+        String asin1 = "930875904375";
+        int frequency = 1;
         // WHEN
 
         // THEN
 
-        System.out.println("   FAIL: Need to implement test to fix Bug 1!");
+        try {
+            Subscription result = classUnderTest.subscribe(customerId, asin1, frequency);
+        } catch (IllegalArgumentException w) {
+            System.out.println("  PASS: Cannot subscribe with invalid Asin.");
+            return true;
+        }
+        System.out.println("   FAIL: An exception should have occurred when subscribing invalid Asin.");
         return false;
     }
 
     // PARTICIPANTS: Rename and fill in the example test below after fixing Bug 2 - refactor as needed
-    public boolean test_bug2() {
-        // GIVEN
+    public boolean subscribe_snsFalse_throwsIllegalException() {
 
-        // WHEN
+            // GIVEN
+            String customerId = "amzn1.account.AEZI3A06339413S37ZHKJQUEGLC4";
+            String asin1 = "B07R5QD598";
+            int frequency = 1;
+            // WHEN
+            // THEN
+            try {
+                Subscription result = classUnderTest.subscribe(customerId, asin1, frequency);
+            } catch (IllegalArgumentException w) {
+                System.out.println("  PASS: Cannot subscribe to non-SNS.");
+                return true;
+            }
+            System.out.println("   FAIL: An exception should have occurred when subscribing invalid SNS.");
+            return false;
 
-        // THEN
-
-        System.out.println("   FAIL: Need to implement test to fix Bug 2!");
-        return false;
     }
 
     // PARTICIPANTS: Rename and fill in the example test below after fixing Bug 3 - refactor as needed
-    public boolean test_bug3() {
+    public boolean getSubscription_validCustomerId_returnsCorrectFormat() {
         // GIVEN
-
-        // WHEN
-
-        // THEN
-
-        System.out.println("   FAIL: Need to implement test to fix Bug 3!");
-        return false;
+        String customerId = "amzn1.account.AEZI3A06339413S37ZHKJQUEGLC4";
+        String asin1 = "B01BMDAVIY";
+        int frequency = 1;
+        Subscription result = classUnderTest.subscribe(customerId, asin1, frequency);
+        String getID = result.getId();
+        Subscription subscription = classUnderTest.getSubscription(getID);
+        if (!result.toString().equals(subscription.toString())) {
+            System.out.println("Fail: Should be equal to eachother");
+            return false;
+        } else {
+            return true;
+        }
     }
 
 

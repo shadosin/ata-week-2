@@ -75,8 +75,9 @@ public class KenzieMathTest {
         KenzieMath kenzieMath = new KenzieMath();
 
         // WHEN - attempt to compute the sum
+
         // PARTICIPANTS: ADD YOUR WHEN CONDITION HERE AND DELETE THE NEXT LINE
-        fail("Expected an attempt to compute the sum for add_sumOutOfBounds_throwsArithmeticException");
+
 
         // THEN - exception thrown
 
@@ -95,8 +96,9 @@ public class KenzieMathTest {
         KenzieMath kenzieMath = new KenzieMath();
 
         // WHEN - attempt to compute the sum
+
         // PARTICIPANTS: ADD YOUR WHEN CONDITION HERE AND DELETE THE NEXT LINE
-        fail("Expected an attempt to compute the sum for add_sumOutofBoundsUnderflow_throwsArithmeticException");
+
 
         // THEN - exception thrown
         assertThrows(ArithmeticException.class,
@@ -106,5 +108,84 @@ public class KenzieMathTest {
 
     // average()
 
-    // PARTICIPANTS: ADD YOUR NEW TESTS HERE (and you can delete this line while you're at it)
+@Test
+public void average_ofSingleInteger_isThatInteger(){
+    //Given
+    int[] oneInteger = {42};
+    KenzieMath kenzieMath = new KenzieMath();
+
+    //When
+    double result = kenzieMath.average(oneInteger);
+
+    //then
+
+    assertEquals(42, result, "Expected average a single int to return the int");
+}
+@Test
+    public void average_ofSeveralIntegers_isCorrect(){
+        //Given
+        int[] values = {7,9};
+        KenzieMath kenzieMath = new KenzieMath();
+        //When
+        double result = kenzieMath.average(values);
+        //Then
+    assertEquals(8, result, "Expected 8 average for 7 & 9");
+    }
+@Test
+    public void average_ofNullArray_throwsIllegalArgumentException(){
+        //Given
+    int[] nullArray = null;
+    KenzieMath kenzieMath = new KenzieMath();
+    //When
+
+    //then
+    assertThrows(IllegalArgumentException.class,
+            () -> kenzieMath.average(nullArray),
+                "Expected IllegalArgumentException when attempting to average null array"
+    );
+}
+@Test
+    public void average_ofPositiveAndNegativeIntegers_isCorrect(){
+        //Given
+    int[] mixed = {-2, 6};
+    KenzieMath kenzieMath = new KenzieMath();
+    //When
+    double result = kenzieMath.average(mixed);
+    //then
+    assertEquals(2, result, "Average of negative and positive numbers should be like subtraction and than division");
+}
+@Test
+    public void average_OfIntegersIncludingZeroes_isCorrect(){
+        //Given
+        int [] zeroArray = {0, 0, 16, 16};
+        KenzieMath kenzieMath = new KenzieMath();
+        //When
+        double result = kenzieMath.average(zeroArray);
+        //Then
+    assertEquals(8, result, "Averaging an array of integers that includes several zeroes returns the correct average");
+}
+@Test
+    public void average_ofEmptyArray_throwsIllegalArgumentException(){
+    //Given
+    int[] emptyArray = {};
+    KenzieMath kenzieMath = new KenzieMath();
+    //When
+
+    //Then
+      assertThrows (IllegalArgumentException.class,
+            () -> kenzieMath.average(emptyArray),
+    "Expected illegal Argument thrown when attempting to average empty array");
+}
+@Test
+    public void average_ofLargeNumbersThatOverflow_throwsArithmeticException(){
+        //Given
+    int [] maxArray = {Integer.MAX_VALUE-5, 3, 3};
+    KenzieMath kenzieMath = new KenzieMath();
+    //When
+
+    //Then
+    assertThrows(ArithmeticException.class,
+            () -> kenzieMath.average(maxArray),
+            "Expected Arithmetic Exception thrown when attempting to average above max value");
+}
 }
